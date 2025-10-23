@@ -1,0 +1,1126 @@
+<!-- ...existing code... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Development Proposal - Booking System Enhancement</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        
+        @page {
+            margin: 2cm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Dark Blue Gradient Color Palette */
+            --primary: #1e3a8a;
+            --primary-dark: #1e1b4b;
+            --primary-light: #3b82f6;
+            --secondary: #0f172a;
+            --accent: #60a5fa;
+            --accent-light: #93c5fd;
+            --success: #10B981;
+            --warning: #F59E0B;
+            
+            /* Gradient Colors */
+            --gradient-start: #1e3a8a;
+            --gradient-mid: #2563eb;
+            --gradient-end: #1e1b4b;
+            
+            /* Neutrals */
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-tertiary: #94A3B8;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --bg-tertiary: #F1F5F9;
+            --border-light: #E2E8F0;
+            --border-medium: #CBD5E1;
+            
+            /* Shadows */
+            --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            /* Spacing */
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --spacing-3xl: 64px;
+            --spacing-4xl: 96px;
+            
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-2xl: 32px;
+            --radius-full: 9999px;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+            background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 50%, #F0F9FF 100%);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Cover Page */
+        .cover {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            color: white;
+            padding: var(--spacing-4xl) var(--spacing-3xl);
+            border-radius: var(--radius-2xl);
+            margin-bottom: var(--spacing-4xl);
+            text-align: center;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(147, 197, 253, 0.2);
+        }
+        
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%);
+            animation: float 25s infinite ease-in-out;
+        }
+        
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(147, 197, 253, 0.15) 0%, transparent 70%);
+            animation: float 30s infinite ease-in-out reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+        
+        .cover h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #FFFFFF 0%, #E0F2FE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .cover .subtitle {
+            font-size: 24px;
+            opacity: 0.95;
+            font-weight: 500;
+            margin-bottom: var(--spacing-3xl);
+            position: relative;
+            z-index: 1;
+            color: #DBEAFE;
+            letter-spacing: -0.5px;
+        }
+        
+        .cover .meta {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-xl);
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .cover .meta-item {
+            font-size: 15px;
+            margin: var(--spacing-sm) 0;
+            opacity: 0.95;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-md);
+        }
+        
+        .cover .meta-item strong {
+            font-weight: 600;
+            color: #DBEAFE;
+            min-width: 130px;
+            text-align: right;
+        }
+        
+        .cover .meta-item span {
+            text-align: left;
+            color: #FFFFFF;
+        }
+        
+        /* Navigation/TOC */
+        .toc {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            margin-bottom: var(--spacing-3xl);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .toc::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .toc h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .toc li {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .toc li:hover {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(96, 165, 250, 0.05) 100%);
+            border-color: var(--accent-light);
+            transform: translateX(4px);
+        }
+        
+        .toc .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Sections */
+        .section {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            margin-bottom: var(--spacing-2xl);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            border: 1px solid var(--border-light);
+        }
+        
+        .section.has-number {
+            padding-left: calc(var(--spacing-2xl) + 60px);
+        }
+        
+        .section-number {
+            position: absolute;
+            left: var(--spacing-lg);
+            top: var(--spacing-lg);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-lg);
+            letter-spacing: -0.5px;
+        }
+        
+        h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-xl) 0 var(--spacing-md) 0;
+            letter-spacing: -0.3px;
+        }
+        
+        h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
+        }
+        
+        h5 {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-md) 0 var(--spacing-xs) 0;
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin: var(--spacing-md) 0;
+            padding-left: var(--spacing-xl);
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin: var(--spacing-sm) 0;
+            position: relative;
+        }
+        
+        ul li::marker {
+            color: var(--primary);
+        }
+        
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(96, 165, 250, 0.03) 100%);
+            border: 2px solid var(--accent-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+        }
+        
+        .highlight-box h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--primary);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .info-box h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        /* Success Box */
+        .success-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.02) 100%);
+            border: 2px solid #10B981;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .success-box h4 {
+            color: #047857;
+        }
+        
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-light);
+        }
+        
+        .card h5 {
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Timeline */
+        .timeline {
+            margin: var(--spacing-xl) 0;
+            position: relative;
+            padding-left: var(--spacing-xl);
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--accent) 100%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: calc(-1 * var(--spacing-xl) - 2px);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: var(--radius-full);
+            border: 3px solid white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .timeline-item strong {
+            color: var(--text-primary);
+        }
+        
+        .timeline-item span {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        /* Price Box */
+        .price-box {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            color: white;
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            margin: var(--spacing-2xl) 0;
+            text-align: center;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .price-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(147, 197, 253, 0.2) 0%, transparent 70%);
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .price-box h2 {
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .price-box .price-amount {
+            font-size: 48px;
+            font-weight: 800;
+            margin: var(--spacing-xl) 0;
+            font-family: 'Space Grotesk', sans-serif;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .price-box p {
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .price-box ul {
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .price-box li {
+            padding: var(--spacing-sm) 0;
+            color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+        }
+        
+        .price-box li::before {
+            content: '✓';
+            color: #10B981;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+        
+        /* Feature Table */
+        .feature-table {
+            width: 100%;
+            margin: var(--spacing-xl) 0;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feature-table thead {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+        }
+        
+        .feature-table th {
+            padding: var(--spacing-md);
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .feature-table td {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-primary);
+        }
+        
+        .feature-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .feature-table tr:hover td {
+            background: var(--bg-secondary);
+        }
+        
+        .feature-table .check {
+            color: var(--success);
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .feature-table .dash {
+            color: var(--text-tertiary);
+            text-align: center;
+        }
+        
+        /* Options Grid */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .option-card {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .option-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .option-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.02) 0%, rgba(96, 165, 250, 0.02) 100%);
+        }
+        
+        .option-card .badge {
+            position: absolute;
+            top: -12px;
+            right: var(--spacing-lg);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+            margin-top: var(--spacing-4xl);
+            border-top: 1px solid var(--border-light);
+            color: var(--text-tertiary);
+        }
+        
+        .footer strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--primary-light);
+        }
+        
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mt-large { margin-top: var(--spacing-xl); }
+        .mb-large { margin-bottom: var(--spacing-xl); }
+        .page-break { page-break-after: always; }
+        
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            
+            .section {
+                box-shadow: none;
+                border: 1px solid var(--border-light);
+            }
+            
+            .page-break {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div class="cover">
+        <h1>Website Development Proposal</h1>
+        <div class="subtitle">Booking System Enhancement &amp; Optimisation</div>
+        <div class="meta">
+            <div class="meta-item">
+                <strong>Prepared For:</strong>
+                <span>Where Rooms Begin</span>
+            </div>
+            <div class="meta-item">
+                <strong>Date:</strong>
+                <span>22 October 2025</span>
+            </div>
+            <div class="meta-item">
+                <strong>Valid Until:</strong>
+                <span>22 November 2025</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h2>📋 Contents</h2>
+        <ul>
+            <li><span class="section-num">1</span> Executive Summary</li>
+            <li><span class="section-num">2</span> Current Challenges</li>
+            <li><span class="section-num">3</span> Proposed Solutions</li>
+            <li><span class="section-num">4</span> Option 1: System Restructuring</li>
+            <li><span class="section-num">5</span> Option 2: Complete Redesign</li>
+            <li><span class="section-num">6</span> Investment Summary</li>
+            <li><span class="section-num">7</span> Deliverables</li>
+            <li><span class="section-num">8</span> Technical Details</li>
+            <li><span class="section-num">9</span> Why Choose This Solution</li>
+            <li><span class="section-num">10</span> Next Steps</li>
+        </ul>
+    </div>
+    
+    <!-- Section 1: Executive Summary -->
+    <div class="section has-number">
+        <div class="section-number">1</div>
+        <h2>Executive Summary</h2>
+        
+        <p>This proposal outlines two comprehensive solutions to transform your current booking system from a rigid, hardcoded structure into a dynamic, user-friendly platform that empowers your team to manage content independently while providing an enhanced customer experience.</p>
+        
+        <p>Both options address the critical issue of hardcoded pricing and content management, implementing a robust CMS infrastructure that eliminates the need for developer intervention for routine updates. Additionally, both solutions incorporate your requested booking flow enhancement with the new 'Review &amp; Extras' step.</p>
+        
+        <div class="highlight-box">
+            <h4>🎯 Key Benefits</h4>
+            <ul>
+                <li>Complete autonomy over pricing and content updates</li>
+                <li>Enhanced booking flow with transparent pricing breakdown</li>
+                <li>Automated workflows for bookings and payments</li>
+                <li>Professional coupon and discount system</li>
+                <li>Clean, maintainable codebase</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Section 2: Current Challenges -->
+    <div class="section has-number">
+        <div class="section-number">2</div>
+        <h2>Current Challenges</h2>
+        
+        <p>Your website currently faces several technical and operational challenges that impact both your team's efficiency and customer experience:</p>
+        
+        <div class="card-grid">
+            <div class="card">
+                <h5>💰 Hardcoded Pricing &amp; Content</h5>
+                <p>Manual code editing required for any price or product updates</p>
+            </div>
+            <div class="card">
+                <h5>📊 Limited Booking Flow</h5>
+                <p>Current flow lacks transparency in pricing breakdown and add-on options</p>
+            </div>
+            <div class="card">
+                <h5>⚙️ No Form Automation</h5>
+                <p>Manual processing of form submissions and payment notifications</p>
+            </div>
+            <div class="card">
+                <h5>🔧 Technical Debt</h5>
+                <p>Previous development left messy, unmaintainable code structure</p>
+            </div>
+            <div class="card">
+                <h5>🎫 No Marketing Tools</h5>
+                <p>Absence of coupon/discount functionality limiting promotional capabilities</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Section 3: Proposed Solutions Overview -->
+    <div class="section has-number">
+        <div class="section-number">3</div>
+        <h2>Proposed Solutions Overview</h2>
+        
+        <div class="options-grid">
+            <div class="option-card">
+                <h3>Option 1: System Restructuring &amp; Optimisation</h3>
+                <p>A comprehensive backend overhaul that maintains your current design while completely rebuilding the technical infrastructure. This option focuses on creating a robust CMS system, implementing automation, and enhancing the booking flow within your existing visual framework.</p>
+                <div class="info-box mt-large">
+                    <h4>Best For:</h4>
+                    <p>Organisations satisfied with their current design but need technical improvements</p>
+                </div>
+            </div>
+            
+            <div class="option-card featured">
+                <span class="badge">Recommended</span>
+                <h3>Option 2: Complete Website Redesign &amp; Development</h3>
+                <p>A ground-up rebuild featuring modern design, optimised user experience, and all technical improvements from Option 1. This comprehensive solution includes professional design services with client approval checkpoints throughout the process.</p>
+                <div class="info-box mt-large">
+                    <h4>Best For:</h4>
+                    <p>Organisations ready for a complete digital transformation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Section 4: Option 1 Details -->
+    <div class="section has-number">
+        <div class="section-number">4</div>
+        <h2>Option 1: System Restructuring &amp; Optimisation</h2>
+        
+        <h3>Scope of Work</h3>
+        
+        <h4>1. CMS Implementation</h4>
+        <ul>
+            <li>Create comprehensive CMS collections for all products, rooms, and booking items</li>
+            <li>Implement intuitive backend interface for content management</li>
+            <li>Enable real-time pricing updates without code access</li>
+            <li>Setup image management system for product photos</li>
+        </ul>
+        
+        <h4>2. Enhanced Booking Flow</h4>
+        <p>Implementation of your requested 5-step booking process:</p>
+        <ol>
+            <li><strong>Package Selection</strong></li>
+            <li><strong>Room Selection</strong></li>
+            <li><strong>Review &amp; Extras (NEW)</strong> - Display itemised pricing, Fast-Track option, Swatch Box option, On-Site Visit option</li>
+            <li><strong>Confirm Details</strong></li>
+            <li><strong>Payment Processing (Stripe)</strong></li>
+        </ol>
+        
+        <h4>3. Automation &amp; Integration</h4>
+        <ul>
+            <li>Zapier/Make.com integration for workflow automation</li>
+            <li>Automated email notifications for bookings and payments</li>
+            <li>Customer data capture and CRM integration</li>
+        </ul>
+        
+        <h4>4. Coupon &amp; Discount System</h4>
+        <ul>
+            <li>Custom CMS collection for coupon management</li>
+            <li>Support for percentage and fixed-amount discounts</li>
+            <li>Expiration date and usage limit controls</li>
+            <li>Real-time validation at checkout</li>
+        </ul>
+        
+        <h4>5. Code Cleanup &amp; Optimisation</h4>
+        <ul>
+            <li>Refactor existing codebase for maintainability</li>
+            <li>Implement proper version control and documentation</li>
+            <li>Performance optimisation for faster load times</li>
+            <li>Mobile responsiveness improvements</li>
+        </ul>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Discovery &amp; Planning</strong>
+                <span>1-2 days</span>
+            </div>
+            <div class="timeline-item">
+                <strong>CMS Setup</strong>
+                <span>1-2 days</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Booking Flow Enhancement</strong>
+                <span>1-2 days</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Automation Setup</strong>
+                <span>3-4 days</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Testing &amp; Launch</strong>
+                <span>1-2 days</span>
+            </div>
+        </div>
+        
+        <div class="highlight-box">
+            <h4>⏱️ Total Timeline</h4>
+            <p><strong>1 - 2 weeks from project start</strong></p>
+        </div>
+    </div>
+    
+    <!-- Section 5: Option 2 Details -->
+    <div class="section has-number page-break">
+        <div class="section-number">5</div>
+        <h2>Option 2: Complete Website Redesign &amp; Development</h2>
+        
+        <p>This comprehensive solution includes all features from Option 1, plus a complete visual redesign focused on modern aesthetics, improved user experience, and conversion optimisation.</p>
+        
+        <h3>Scope of Work</h3>
+        
+        <h4>1. Design Phase</h4>
+        <ul>
+            <li>Comprehensive UX/UI audit and competitor analysis</li>
+            <li>Creation of detailed wireframes for all pages</li>
+            <li>High-fidelity Figma designs with interactive prototypes</li>
+            <li>Mobile-first responsive design approach</li>
+            <li>Client feedback rounds and revisions</li>
+        </ul>
+        
+        <h4>2. Development Phase</h4>
+        <p>Includes all features from Option 1, plus:</p>
+        <ul>
+            <li>Modern, conversion-optimised page layouts</li>
+            <li>Enhanced animations and micro-interactions</li>
+            <li>Advanced SEO optimisation and schema markup</li>
+            <li>Performance optimisation for Core Web Vitals</li>
+            <li>A/B testing capability for conversion optimisation</li>
+        </ul>
+        
+          
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Discovery &amp; Strategy</strong>
+                <span>1-3 days</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Wireframing &amp; UX</strong>
+                <span>5-8 days</span>
+            </div>
+            
+            <div class="timeline-item">
+                <strong>Development</strong>
+                <span>10-15 days</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Testing &amp; Optimisation</strong>
+                <span>1-2 days</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Launch &amp; Training</strong>
+                <span>1-2 days</span>
+            </div>
+        </div>
+        
+        <div class="highlight-box">
+            <h4>⏱️ Total Timeline</h4>
+            <p><strong>3-4 weeks from project start</strong></p>
+        </div>
+    </div>
+    
+    <!-- Section 6: Investment Summary -->
+    <div class="section has-number">
+        <div class="section-number">6</div>
+        <h2>Investment Summary</h2>
+        
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Option 1</th>
+                    <th>Option 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CMS Implementation</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Enhanced Booking Flow</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Automation Setup</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Coupon System</td>
+                    <td class="check">✓</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Complete Redesign</td>
+                    <td class="dash">-</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Wireframes/Figma</td>
+                    <td class="dash">-</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td>Customer Portal</td>
+                    <td class="dash">-</td>
+                    <td class="check">✓</td>
+                </tr>
+                <tr>
+                    <td><strong>Investment Range</strong></td>
+                    <td><strong>£1500-£1800</strong></td>
+                    <td><strong>£6200-£6500</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p class="text-center mt-large"><em>Note: Final pricing will be determined after initial discovery phase. Payment terms include 50% upfront and 50% upon completion.</em></p>
+    </div>
+    
+    <!-- Section 7: Deliverables -->
+    <div class="section has-number">
+        <div class="section-number">7</div>
+        <h2>Deliverables</h2>
+        
+        <div class="options-grid">
+            <div class="option-card">
+                <h3>Option 1 Deliverables</h3>
+                <ol>
+                    <li>Fully functional CMS with training documentation</li>
+                    <li>Enhanced 5-step booking flow implementation</li>
+                    <li>Zapier/Make.com automation workflows</li>
+                    <li>Coupon management system</li>
+                    <li>30-day post-launch support</li>
+                </ol>
+            </div>
+            
+            <div class="option-card">
+                <h3>Option 2 Deliverables</h3>
+                <p><em>Includes all Option 1 deliverables plus:</em></p>
+                <ul>
+                    <li>Complete Figma design files</li>
+                    <li>Interactive prototype for approval</li>
+                    <li>Responsive website across all devices</li>
+                    <li>SEO optimisation package</li>
+                    <li>60-day post-launch support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Section 8: Technical Implementation Details -->
+    <div class="section has-number">
+        <div class="section-number">8</div>
+        <h2>Technical Implementation Details</h2>
+        
+        <h3>CMS Architecture</h3>
+        <p>The CMS implementation will utilise Webflow's native CMS capabilities with custom collections for:</p>
+        <ul>
+            <li><strong>Products/Services:</strong> Including pricing, descriptions, images, and availability</li>
+            <li><strong>Rooms:</strong> With dynamic pricing, capacity, amenities, and gallery</li>
+            <li><strong>Bookings:</strong> Storing customer data, selections, and transaction details</li>
+            <li><strong>Coupons:</strong> Managing discount codes, validity periods, and usage limits</li>
+        </ul>
+        
+        <h3>Coupon System Architecture</h3>
+        <p>While Webflow doesn't natively support complex discount logic, we'll implement a custom solution:</p>
+        <ul>
+            <li>CMS collection for coupon management with fields for code, discount type, amount, and validity</li>
+            <li>JavaScript-based validation at checkout to apply discounts</li>
+            <li>Integration with payment processor to ensure accurate pricing</li>
+            <li>Optional: External microservice for advanced coupon logic if needed</li>
+        </ul>
+    </div>
+    
+    <!-- Section 9: Why Choose This Solution -->
+    <div class="section has-number">
+        <div class="section-number">9</div>
+        <h2>Why Choose This Solution</h2>
+        
+        <div class="success-box">
+            <h4>✨ Our Unique Value Proposition</h4>
+            <ul>
+                <li><strong>Webflow Expertise:</strong> Deep understanding of Webflow's capabilities and limitations</li>
+                <li><strong>User-Centric Approach:</strong> Focus on both your team's management needs and customer experience</li>
+                <li><strong>Future-Proof Architecture:</strong> Scalable solutions that grow with your business</li>
+                <li><strong>Comprehensive Support:</strong> Training and documentation to ensure your team's independence</li>
+                <li><strong>Proven Track Record:</strong> Experience with similar booking system implementations</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Section 10: Next Steps -->
+    <div class="section has-number">
+        <div class="section-number">10</div>
+        <h2>Next Steps</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Step 1</strong>
+                <span>Review this proposal and select your preferred option</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Step 2</strong>
+                <span>Schedule a discovery call to discuss specific requirements</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Step 3</strong>
+                <span>Finalise project scope and timeline</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Step 4</strong>
+                <span>Sign agreement and initiate project</span>
+            </div>
+            <div class="timeline-item">
+                <strong>Step 5</strong>
+                <span>Begin transformation of your booking system</span>
+            </div>
+        </div>
+        
+        <div class="info-box mt-large">
+            <h4>Questions?</h4>
+            <p>I'm excited about the opportunity to transform your booking system and create a powerful, user-friendly platform for your business. Please don't hesitate to reach out with any questions or to discuss how we can customise these solutions to perfectly fit your needs.</p>
+        </div>
+    </div>
+    
+    <!-- Conclusion -->
+    <div class="section">
+        <h2>Ready to Transform Your Booking System?</h2>
+        <p>Thank you for considering this proposal. I look forward to partnering with you on this exciting project and delivering a solution that exceeds your expectations.</p>
+        
+        <div class="highlight-box mt-large">
+            <h4>💼 Let's Get Started</h4>
+            <p>Choose the option that best fits your needs, and let's begin creating a booking system that empowers your team and delights your customers.</p>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <strong>Matthew Turner</strong>
+        <strong>Senior Web Developer</strong>
+        <a href="https://matt-codes.webflow.io">matt-codes.webflow.io</a>
+    </div>
+</body>
+</html>
